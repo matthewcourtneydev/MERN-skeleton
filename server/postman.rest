@@ -1,0 +1,59 @@
+GET http://localhost:3001/users
+
+###
+
+GET http://localhost:3001/games
+
+###
+
+GET http://localhost:3001/users/64eecf6923e6a9024e09d8e3
+
+###
+
+PATCH http://localhost:3001/users/64eecf6923e6a9024e09d8e3
+Content-Type: application/json
+
+{
+    "gameId": "64efa389d178d40e1dd4af00"
+}
+
+###
+
+POST http://localhost:3001/
+Content-Type: application/json
+
+{
+    "email": "firstUser@gmail.com",
+    "password": "firstPassword1"
+}
+
+###
+
+POST http://localhost:3001/
+Content-Type: application/json
+
+{
+    "email": "secondUser@gmail.com",
+    "password": "secondPassword2"
+}
+
+###
+
+POST http://localhost:3001/users/
+Content-Type: application/json
+
+{
+    "email": "fourthUser@gmail.com",
+    "password": "fourthPassword4"
+}
+
+###
+POST http://localhost:3001/games/
+Content-Type: application/json
+
+{
+    "score": 100
+}
+
+###
+http://localhost:3001/users/64eed241d4850e210be16ae1
