@@ -1,6 +1,7 @@
 const express = require('express');
 const userRouter = express.Router();
 const User = require('../models/user-schema');
+const authenticateToken = require('../middleware/authenticateToken')
 
 // GET ALL USERS
 userRouter.get('/', async (req, res) => {
@@ -31,7 +32,17 @@ userRouter.post('/', async (req, res, next) => {
 userRouter.get('/:id', async (req, res) => {
     try {
         const calledUser = await User.findById(req.params.id).populate('gamesWon').exec();
-        res.json(calledUser)
+        res.json({user: calledUser, message: "user public info"})
+    }catch(err) {
+        res.json({ error: err})
+    }
+})
+
+// GET ONE USER PRIVATE
+userRouter.get('/:id/private', authenticateToken, async (req, res) => {
+    try {
+        const calledUser = await User.findById(req.params.id).populate('gamesWon').exec();
+        res.json({user: calledUser, message: "user private info"})
     }catch(err) {
         res.json({ error: err})
     }

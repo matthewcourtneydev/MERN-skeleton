@@ -6,15 +6,26 @@ GET http://localhost:3001/games
 
 ###
 
-GET http://localhost:3001/users/64eecf6923e6a9024e09d8e3
-
-###
-
-PATCH http://localhost:3001/users/64eecf6923e6a9024e09d8e3
+POST http://localhost:3001/login
 Content-Type: application/json
 
 {
-    "gameId": "64efa389d178d40e1dd4af00"
+    "email": "authTest@gmail.com",
+    "password": "password123"
+}
+
+###
+
+GET http://localhost:3001/users/64eec5df98efa9d9d0ca3bdb/private
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF1dGhUZXN0QGdtYWlsLmNvbSIsImlhdCI6MTY5MzUyNTA1OX0.0IRNDAgjSHqIpdWQOQtsj25VrDKUagelev5NIare2Pw
+
+###
+
+PATCH http://localhost:3001/users/64eec5df98efa9d9d0ca3bdb
+Content-Type: application/json
+
+{
+    "gameId": "64f02339d5b5a5b5af3d404e"
 }
 
 ###
@@ -23,8 +34,8 @@ POST http://localhost:3001/
 Content-Type: application/json
 
 {
-    "email": "firstUser@gmail.com",
-    "password": "firstPassword1"
+    "email": "authUser@gmail.com",
+    "password": "authPassword1"
 }
 
 ###
@@ -52,7 +63,7 @@ POST http://localhost:3001/games/
 Content-Type: application/json
 
 {
-    "score": 100
+    "score": 2
 }
 
 ###
