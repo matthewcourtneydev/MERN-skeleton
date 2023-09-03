@@ -3,7 +3,9 @@ import React from 'react';
 const UserPublicPage = () => {
     return (
         <div id="user-public-page" className="page">
-            User Public Page
+            <div className="page-content">
+                <h1>User Private Page</h1>
+            </div>
         </div>
     );
 }
