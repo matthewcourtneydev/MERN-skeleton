@@ -1,15 +1,14 @@
-import {
-  Routes,
-  Route,
-} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
-import Homepage from './pages/homepage';
-import LoginPage from './pages/login-page';
-import RegisterPage from './pages/register-page';
-import UserPublicPage from './pages/user-public-page';
-import UserPrivatePage from './pages/user-private-page';
+import Homepage from "./pages/homepage";
+import LoginPage from "./pages/login-page";
+import RegisterPage from "./pages/register-page";
+import UserPublicPage from "./pages/user-public-page";
+import UserPrivatePage from "./pages/user-private-page";
+import ErrorPage from "./pages/error-page";
+import PrivateRoutes from "./utils/private-routes";
 
-import './App.scss';
+import "./App.scss";
 
 function App() {
   return (
@@ -19,7 +18,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/:user/public" element={<UserPublicPage />} />
-        <Route path="/:user/private" element={<UserPrivatePage />} />
+        <Route element={<PrivateRoutes />}>
+          <Route path="/:user/private" element={<UserPrivatePage />} />
+        </Route>
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>
   );
