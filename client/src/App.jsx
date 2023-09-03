@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import Homepage from "./pages/homepage";
 import LoginPage from "./pages/login-page";
@@ -11,6 +12,8 @@ import PrivateRoutes from "./utils/private-routes";
 import "./App.scss";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState();
+
   return (
     <div className="App">
       <Routes>
