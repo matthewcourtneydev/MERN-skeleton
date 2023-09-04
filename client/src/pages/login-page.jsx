@@ -1,13 +1,22 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../components/login-form";
-import Nav from "../components/nav";
+import { useAuthContext } from '../contexts/auth-context';
+
 
 const LoginPage = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const authenticatedUser = useAuthContext();
+  const navigate = useNavigate();
+
+  console.log(authenticatedUser)
+  useEffect(() => {
+    if (authenticatedUser) {
+      navigate("/")
+    }
+  }, [authenticatedUser])
+  
   return (
     <div id="login-page" className="page">
-      <Nav isLoggedIn={isLoggedIn} />
       <div className="page-content">
         <h1>Login</h1>
         <LoginForm />

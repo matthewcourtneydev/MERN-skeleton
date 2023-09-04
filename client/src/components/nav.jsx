@@ -1,20 +1,19 @@
 import React, { useState } from "react";
+import { useAuthContext, useUpdateAuthStatus } from '../contexts/auth-context';
 
 const Nav = (props) => {
-    const [loggedInStatus, setLoggedInStatus] = useState(props.isLoggedIn);
-    const [userInfo, setUserInfo] = useState({email: "test@gmail.com", password: "12345", id: "1"});
+  const authenticatedUser = useAuthContext();
+  const updatedUsersAuthenticationStatus = useUpdateAuthStatus();
 
-    function logoutFunction() {
-      console.log("LOG OUT")
-    }
   return (
     <nav id="navbar">
       <ul className="nav-items">
-        {loggedInStatus ? (
+        {authenticatedUser ? (
           <>
             <li className="nav-item"><a href="/">Home</a></li>
-            <li className="nav-item"><a href={`/${userInfo.id}/private`}>profile</a></li>
-            <button className="logout" onClick={logoutFunction}>Logout</button>
+            {/* href will be for user.id */}
+            <li className="nav-item"><a href="/sdasda/private">profile</a></li>
+            <button className="logout" onClick={updatedUsersAuthenticationStatus}>Logout</button>
           </>
         ) : (
           <>
