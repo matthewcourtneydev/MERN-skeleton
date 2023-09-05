@@ -1,17 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import RegisterForm from "../components/register-form";
-import { useAuthContext } from "../contexts/auth-context";
+import { UserContext } from "../contexts/user-context";
 
 const RegisterPage = () => {
-  const authenticatedUser = useAuthContext();
+  const userState = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authenticatedUser) {
-      navigate("/");
+    if (userState.isAuth === true) {
+      navigate("/")
     }
-  }, []);
+  }, [userState])
+
   return (
     <div id="register-page" className="page">
       <div className="page-content">

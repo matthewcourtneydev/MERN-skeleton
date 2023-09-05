@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 const ErrorPage = () => {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
     return (
         <div className="page" id="error-page">
             <div className="page-content">

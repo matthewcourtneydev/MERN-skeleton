@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-
-import { useAuthContext, useUpdateAuthStatus } from '../contexts/auth-context';
+import React, { useContext, useState } from 'react';
+import { UserContext } from '../contexts/user-context';
 
 const Homepage = () => {
-    const authenticatedUser = useAuthContext();
-    const updatedUsersAuthenticationStatus = useUpdateAuthStatus();
+    const userState = useContext(UserContext);
 
+    console.log(userState)
     return (
         <div id="homepage" className="page">
             <div className="page-content">
                 <h1>Home Page</h1>
-                <p>User Logged In: { authenticatedUser ? (<span>True</span>) : (<span>False</span>)}</p>
+                <h2>Email: {userState.email}</h2>
+                <h3>PassWord: {userState.password}</h3>
             </div>
         </div>
     );

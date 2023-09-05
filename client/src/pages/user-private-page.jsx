@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/user-context";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../contexts/auth-context";
 
 const UserPrivatePage = () => {
-  const authenticatedUser = useAuthContext();
+  const userState = useContext(UserContext);
   const navigate = useNavigate();
+
+  console.log(userState)
 
   return (
     <>
-      {authenticatedUser ? (
+      {userState.isAuth ? (
         <div id="user-private-page" className="page">
           <div className="page-content">
             <h1>User Private Page</h1>

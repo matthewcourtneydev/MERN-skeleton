@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import LoginForm from "../components/login-form";
-import { useAuthContext } from '../contexts/auth-context';
+import { UserContext } from "../contexts/user-context";
 
 
 const LoginPage = () => {
-  const authenticatedUser = useAuthContext();
   const navigate = useNavigate();
+  const userState = useContext(UserContext);
 
-  console.log(authenticatedUser)
   useEffect(() => {
-    if (authenticatedUser) {
+    if (userState.isAuth === true) {
       navigate("/")
     }
-  }, [authenticatedUser])
+  }, [userState])
   
   return (
     <div id="login-page" className="page">
       <div className="page-content">
         <h1>Login</h1>
+        <h2>Email: {userState.email}</h2>
+        <h3>Password: {userState.password}</h3>
         <LoginForm />
         <span>
           Not a member? <Link to={"/register"}>Register</Link> now
