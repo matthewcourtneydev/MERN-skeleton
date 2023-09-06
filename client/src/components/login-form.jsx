@@ -1,43 +1,52 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../contexts/user-context";
+import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const emailVal = useRef();
+  const passwordVal = useRef();
 
-  let initFormData = {
-    email: "",
-    password: "",
-  };
-
-  const [formData, setFormData] = useState(initFormData);
-  const { userState, setUserState } = useContext(UserContext);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
+  function postCall(formInfo) {
+    return axios.post("http://localhost:3001/login", formInfo);
+  }
 
   function handleSubmit() {
+    let formData = {
+      email: emailVal.current.value,
+      password: passwordVal.current.value,
+    };
+
     console.log(formData);
-    localStorage.setItem("user", JSON.stringify({...formData, isAuth: true}));
-    navigate("/")
-    navigate(0);
-    // POST LOGIN
-    // AUTH USER
-    // REDIRECT
+
+    fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        localStorage.setItem("user", JSON.stringify({ ...data.user, accessToken: data.accessToken, iauth: true }));
+        navigate("/");
+        navigate(0);
+      })
+      .catch((err) => {
+        console.log(err, "error");
+      });
   }
 
   return (
     <div id="login-form">
       <div className="form">
         <label htmlFor="email">Email</label>
-        <input type="email" name="email" onChange={handleInputChange} />
+        <input type="email" name="email" ref={emailVal} />
         <label htmlFor="password">Password</label>
-        <input type="password" name="password" onChange={handleInputChange} />
+        <input type="password" name="password" ref={passwordVal} />
         <button onClick={handleSubmit} className="submit-btn">
           Submit
         </button>
