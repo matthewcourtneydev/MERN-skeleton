@@ -7,7 +7,7 @@ const Nav = () => {
   const navigate = useNavigate();
 
   function navLogout() {
-    localStorage.setItem("user", JSON.stringify({ email: "", password: ""}))
+    localStorage.removeItem("user")
     navigate("/");
     navigate(0)
   }
