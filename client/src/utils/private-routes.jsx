@@ -5,7 +5,6 @@ import { UserContext } from '../contexts/user-context';
 const PrivateRoutes = () => {
     let userState = useContext(UserContext)
     let auth = {'token': userState.isAuth}
-    debugger;
     return (
         auth.token ? <Outlet /> : <Navigate to="/login" /> 
     );

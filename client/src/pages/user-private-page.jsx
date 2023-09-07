@@ -6,14 +6,16 @@ const UserPrivatePage = () => {
   const userState = useContext(UserContext);
   const navigate = useNavigate();
 
-  console.log(userState)
-
   return (
     <>
       {userState.isAuth ? (
         <div id="user-private-page" className="page">
           <div className="page-content">
             <h1>User Private Page</h1>
+            <p>your id is {userState._id}</p>
+            <p>your email is {userState.email}</p>
+            <p>your password is {userState.password}</p>
+            <p>Good thing no one can access this page except you.</p>
           </div>
         </div>
       ) : (
