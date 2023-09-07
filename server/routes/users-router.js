@@ -19,7 +19,8 @@ userRouter.post('/', async (req, res, next) => {
     
     const newUser = new User({
         email: req.body.email,
-        password: req.body.password
+        password: req.body.password,
+        username: req.body.username
     });
 
     try{
@@ -35,16 +36,6 @@ userRouter.get('/:email', async (req, res) => {
     try {
         const calledUser = await User.findOne({email: req.params.email}).populate('gamesWon').exec();
         res.json({user: calledUser, message: "user public info"})
-    }catch(err) {
-        res.json({ error: err})
-    }
-})
-
-// GET ONE USER PRIVATE
-userRouter.get('/:id/private', authenticateToken, async (req, res) => {
-    try {
-        const calledUser = await User.findById(req.params.id).populate('gamesWon').exec();
-        res.json({user: calledUser, message: "user private info"})
     }catch(err) {
         res.json({ error: err})
     }

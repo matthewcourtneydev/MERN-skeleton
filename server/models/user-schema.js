@@ -5,6 +5,7 @@ const Game = require('../models/game-schema');
 userSchema = new mongoose.Schema({
     email: { type: String },
     password: { type: String},
+    username: { type: String},
     gamesWon: [{ type: Schema.Types.ObjectId, ref: 'Game' }]
 })
 

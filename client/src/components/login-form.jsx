@@ -14,8 +14,6 @@ const LoginForm = () => {
       password: passwordVal.current.value,
     };
 
-    console.log(formData);
-
     fetch("http://localhost:3001/login", {
       method: "POST",
       headers: {
@@ -27,7 +25,10 @@ const LoginForm = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        if (formData.password !== data.user.password) {
+          setError("Incorrect Password");
+          return;
+        }
         if (data.error) {
           setError(data.error);
           return;

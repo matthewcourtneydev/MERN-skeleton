@@ -18,8 +18,6 @@ const LoginPage = () => {
     <div id="login-page" className="page">
       <div className="page-content">
         <h1>Login</h1>
-        <h2>Email: {userState.email}</h2>
-        <h3>Password: {userState.password}</h3>
         <LoginForm />
         <span>
           Not a member? <Link to={"/register"}>Register</Link> now

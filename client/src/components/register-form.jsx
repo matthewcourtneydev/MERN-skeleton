@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 const RegisterForm = () => {
   const [error, setError] = useState();
   const emailVal = useRef();
+  const usernameVal = useRef();
   const passwordVal = useRef();
+  const confirmPasswordVal = useRef();
   const navigate = useNavigate();
 
   function getFormValues() {
     return {
       email: emailVal.current.value,
+      username: usernameVal.current.value,
       password: passwordVal.current.value,
+      confirmPassword: confirmPasswordVal.current.value
     };
   }
 
@@ -26,7 +30,6 @@ const RegisterForm = () => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.error) {
           setError(data.error);
           return;
@@ -67,13 +70,18 @@ const RegisterForm = () => {
 
   function handleSubmit() {
     let values = getFormValues();
+
+    if (values.password !== values.confirmPassword) {
+      setError("Passwords must match!");
+      return 
+    }
+
     const apiString = `http://localhost:3001/users/${values.email}`;
     fetch(apiString, { method: "GET" })
       .then((response) => {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.user) {
           setError("EMAIL ALREADY IN USE");
           return;
@@ -93,11 +101,15 @@ const RegisterForm = () => {
   return (
     <div id="register-form">
       <div className="form">
-        <div className="error-field">{error}</div>
+        <h3 className="error-field">{error}</h3>
         <label htmlFor="email">Email</label>
         <input type="email" name="email" ref={emailVal} />
+        <label htmlFor="username">Username</label>
+        <input type="username" name="username" ref={usernameVal} />
         <label htmlFor="password">Password</label>
         <input type="password" name="password" ref={passwordVal} />
+        <label htmlFor="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" ref={confirmPasswordVal} />
         <button className="submit-btn" onClick={handleSubmit}>
           Submit
         </button>
