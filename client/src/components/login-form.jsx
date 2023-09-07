@@ -1,21 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const emailVal = useRef();
   const passwordVal = useRef();
 
-  const [error, setError] = useState(false)
-  
-  useEffect(() => {
-
-  })
-
-  function postCall(formInfo) {
-    return axios.post("http://localhost:3001/login", formInfo);
-  }
+  const [error, setError] = useState(false);
 
   function handleSubmit() {
     let formData = {
@@ -38,11 +29,18 @@ const LoginForm = () => {
       .then((data) => {
         console.log(data);
         if (data.error) {
-          setError(data.error)
-          return
+          setError(data.error);
+          return;
         }
 
-        localStorage.setItem("user", JSON.stringify({ ...data.user, accessToken: data.accessToken, isAuth: true }));
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            ...data.user,
+            accessToken: data.accessToken,
+            isAuth: true,
+          })
+        );
         navigate("/");
         navigate(0);
       })

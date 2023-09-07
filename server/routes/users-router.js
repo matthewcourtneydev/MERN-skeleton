@@ -15,6 +15,8 @@ userRouter.get('/', async (req, res) => {
 
 // MAKE A USER
 userRouter.post('/', async (req, res, next) => {
+    console.log(req.body);
+    
     const newUser = new User({
         email: req.body.email,
         password: req.body.password
@@ -29,9 +31,9 @@ userRouter.post('/', async (req, res, next) => {
 })
 
 // GET ONE USER
-userRouter.get('/:id', async (req, res) => {
+userRouter.get('/:email', async (req, res) => {
     try {
-        const calledUser = await User.findById(req.params.id).populate('gamesWon').exec();
+        const calledUser = await User.findOne({email: req.params.email}).populate('gamesWon').exec();
         res.json({user: calledUser, message: "user public info"})
     }catch(err) {
         res.json({ error: err})

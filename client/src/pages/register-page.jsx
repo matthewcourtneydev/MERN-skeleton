@@ -16,6 +16,8 @@ const RegisterPage = () => {
   return (
     <div id="register-page" className="page">
       <div className="page-content">
+        <h2>Email: <span>{userState.email}</span></h2>
+        <h2>Password: <span>{userState.password}</span></h2>
         <h1>Register</h1>
         <RegisterForm />
         <span>
